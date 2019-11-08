@@ -1,0 +1,7 @@
+h1 your notes
+    form(method='POST',action='/notes/add')
+        label title:
+        input.form-control(name='title',type='text')
+        label notes:
+        input.form-control(name='notes',type='text')
+        input.btn.btn-primary(type='submit',value='Submit')

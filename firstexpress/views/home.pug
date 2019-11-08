@@ -1,0 +1,78 @@
+head
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|McLaren&display=swap")
+
+   
+body
+    h1 Welcome to the page
+    hr
+    h1 your notes
+    .form
+        form(method='POST',action='/notes/add', autocomplete="off")
+            
+            input(name='title',type='text',placeholder='title',style="background-color:#34353a;color: #e8eaed;width:500px;height:50px;border:none ;border-radius:2px")
+            br
+           
+            
+            <textarea  name="notes" type="text" style="width:500px;height:150px;border:none;border:none;border-radius:2px" placeholder='notes'></textarea>
+            br
+            br
+            input.btn.btn-primary(type='submit',value='Submit' style="width:70px;height:50px;background-color:#34353a;color:#e8eaed;border:none;")
+    
+    
+    
+
+    
+        
+
+	
+    
+    
+    ul
+        each note, i in notes
+            .notes-container
+                a(href='/delete/notes/'+note._id) <img src="https://img.icons8.com/color/48/000000/delete-sign.png">
+                .title(style="font-family: 'Liu Jian Mao Cao', cursive;")
+                    p=note.title
+                button(class="trigger") Edit
+                .modal
+                    .modal-content
+                        span(class='close-button') x
+                        form(method='POST',action='/notes/edit/'+note._id, autocomplete="off")
+            
+                            input(name='title',type='text',style="background-color:#34353a;color: #e8eaed;width:500px;height:50px;border:none ;border-radius:2px",value=note.title)
+                            br
+                        
+                            
+                            textarea(name="notes" type="text" style="width:500px;height:150px;border:none;border:none;border-radius:2px") 
+                                h =note.notes
+                            br
+                            br
+                            input.btn.btn-primary(type='submit',value='Submit' style="width:70px;height:50px;background-color:#34353a;color:#e8eaed;border:none;")
+                                
+                
+                p=note.notes
+                
+                
+            br
+footer
+    hr
+    p copyright &copy praveen
+script.
+    var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
